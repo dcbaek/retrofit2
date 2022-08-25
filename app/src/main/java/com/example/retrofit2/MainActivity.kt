@@ -26,10 +26,10 @@ class MainActivity : AppCompatActivity() {
             id = userId.text.toString()
             pw = userPassword.text.toString()
             val user = User()
-            user.Id = userId.text.toString()
+            user.id = userId.text.toString()
             user.password = userPassword.text.toString()
 
-            Log.d("BUTTON CLICKED", "id: " + user.Id + ", pw: " + user.password)
+            Log.d("BUTTON CLICKED", "id: " + user.id + ", pw: " + user.password)
             Login(user)
         }
     }

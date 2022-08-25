@@ -1,7 +1,7 @@
 package com.example.retrofit2
 
 class User {
-    var Id: String? = null
+    var id: String? = null
         get() {
             return field
         }
