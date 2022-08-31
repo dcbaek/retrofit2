@@ -8,4 +8,8 @@ public interface API {
     //login
     @POST("/android")
     fun getLoginResponse(@Body user: User) : Call<String>
+
+    //Body_data
+    @POST("/body-data")
+    fun BodyResponse(@Body user: User) : Call<String>
 }

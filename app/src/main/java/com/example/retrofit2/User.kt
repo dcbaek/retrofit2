@@ -2,14 +2,10 @@ package com.example.retrofit2
 
 class User {
     var id: String? = null
-        get() {
-            return field
-        }
     var password: String? = null
-    get() {
-        return field
-    }
-    set(value) {
-        field = value
-    }
+    var pulse_data: String? =null
+    var temperature_data: String? = null
+    var blood_sugar_data: String? = null
+
+
 }
