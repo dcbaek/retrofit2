@@ -1,5 +1,9 @@
 package com.example.retrofit2
 
+import com.example.retrofit2.entity.Bloodsugar
+import com.example.retrofit2.entity.Pulse
+import com.example.retrofit2.entity.Temperature
+import com.example.retrofit2.entity.User
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.*
@@ -10,6 +14,15 @@ public interface API {
     fun getLoginResponse(@Body user: User) : Call<String>
 
     //Body_data
-    @POST("/body-data")
-    fun BodyResponse(@Body user: User) : Call<String>
+    @POST("/pulse-data")
+    fun getPusleResponse(@Body pulse: Pulse) : Call<String>
+
+    //Body_data
+    @POST("/temperature-data")
+    fun getTemperatureResponse(@Body temperature: Temperature) : Call<String>
+
+    //Body_data
+    @POST("/bloodsugar-data")
+    fun getBloodsugarResponse(@Body bloodsugar: Bloodsugar) : Call<String>
+
 }

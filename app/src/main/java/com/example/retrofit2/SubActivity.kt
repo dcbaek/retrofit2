@@ -2,21 +2,23 @@ package com.example.retrofit2
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat.startActivity
+import com.example.retrofit2.entity.Bloodsugar
+import com.example.retrofit2.entity.Pulse
+import com.example.retrofit2.entity.Temperature
+import com.example.retrofit2.entity.User
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class SubActivity : AppCompatActivity() {
 
-    var pulse_data: String = ""
-    var temperature_data: String = ""
-    var blood_sugar_data: String = ""
+    var pulseData: String = ""
+    var temperatureData: String = ""
+    var bloodsugarData: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,19 +37,25 @@ class SubActivity : AppCompatActivity() {
 
         btn_body_data.setOnClickListener {
 
-            pulse_data = sub_pulse_data.text.toString()
-            temperature_data = sub_temperature_data.text.toString()
-            blood_sugar_data = sub_blood_sugar_data.text.toString()
-            val user = User()
-            user.pulse_data = sub_pulse_data.text.toString()
-            user.temperature_data = sub_temperature_data.text.toString()
-            user.blood_sugar_data = sub_blood_sugar_data.text.toString()
+            pulseData = sub_pulse_data.text.toString()
+            temperatureData = sub_temperature_data.text.toString()
+            bloodsugarData = sub_blood_sugar_data.text.toString()
 
-            Log.d("BUTTON CLICKED", "pulse_data: " + user.pulse_data +
-                    ", temperature_data: " + user.temperature_data +
-                    ", blood_sugar_data: " + user.blood_sugar_data)
+            val pulse = Pulse()
+            val temperature = Temperature()
+            val bloodsugar = Bloodsugar()
 
-            Login(user)
+            pulse.pulseData = sub_pulse_data.text.toString()
+            temperature.temperatureData = sub_temperature_data.text.toString()
+            bloodsugar.bloodsugarData = sub_blood_sugar_data.text.toString()
+
+            Log.d("BUTTON CLICKED", "pulseData: " + pulse.pulseData +
+                    "temperData: " + temperature.temperatureData +
+                    "bloodsugarData: " + bloodsugar.bloodsugarData)
+
+            pulseData(pulse)
+            temperatureData(temperature)
+            bloodsugarData(bloodsugar)
         }
 
         btn_retun_data.setOnClickListener() {
@@ -58,8 +66,8 @@ class SubActivity : AppCompatActivity() {
 
     }
 
-    fun Login(user: User){
-        val call = RetrofitBuilder.api.BodyResponse(user)
+    fun pulseData(pulse: Pulse){
+        val call = RetrofitBuilder.api.getPusleResponse(pulse)
         call.enqueue(object : Callback<String> {
             // 통신에 성곻
             override fun onResponse(call: Call<String>, response: Response<String>) {
@@ -77,5 +85,42 @@ class SubActivity : AppCompatActivity() {
         })
     }
 
+    fun temperatureData(temperature: Temperature){
+        val call = RetrofitBuilder.api.getTemperatureResponse(temperature)
+        call.enqueue(object : Callback<String> {
+            // 통신에 성곻
+            override fun onResponse(call: Call<String>, response: Response<String>) {
+                if(response.isSuccessful()) { // 응답 잘 받은 경우
+                    Log.d("RESPONSE: ", response.body().toString())
+                }   else { // 통신 성공 but 응답 실패
+                    Log.d("RESPONSE", "FAILURE")
+                }
+            }
+
+            override fun onFailure(call: Call<String>, t: Throwable) {
+                // 통신에 실패한 경우
+                Log.d("CONNECTION FAILURE: ", t.localizedMessage)
+            }
+        })
+    }
+
+    fun bloodsugarData(bloodsugar: Bloodsugar){
+        val call = RetrofitBuilder.api.getBloodsugarResponse(bloodsugar)
+        call.enqueue(object : Callback<String> {
+            // 통신에 성곻
+            override fun onResponse(call: Call<String>, response: Response<String>) {
+                if(response.isSuccessful()) { // 응답 잘 받은 경우
+                    Log.d("RESPONSE: ", response.body().toString())
+                }   else { // 통신 성공 but 응답 실패
+                    Log.d("RESPONSE", "FAILURE")
+                }
+            }
+
+            override fun onFailure(call: Call<String>, t: Throwable) {
+                // 통신에 실패한 경우
+                Log.d("CONNECTION FAILURE: ", t.localizedMessage)
+            }
+        })
+    }
 
 }
