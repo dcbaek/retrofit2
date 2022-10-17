@@ -13,8 +13,8 @@ import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
 
-    var userName: String = ""
-    var userPassword: String = ""
+    var username: String = ""
+    var password: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,18 +31,18 @@ class MainActivity : AppCompatActivity() {
 
         login_button.setOnClickListener{
 
-            userName = userid.text.toString()
-            userPassword = userpw.text.toString()
+            username = userid.text.toString()
+            password = userpw.text.toString()
 
             val user = User()
 
-            user.userName = userid.text.toString()
-            user.userPassword = userpw.text.toString()
+            user.username = userid.text.toString()
+            user.password = userpw.text.toString()
 
             val intent = Intent(this, SubActivity::class.java)
             startActivity(intent)
 
-            Log.d("BUTTON CLICKED", "id: " + user.userName + ", pw: " + user.userPassword)
+            Log.d("BUTTON CLICKED", "id: " + user.username + ", pw: " + user.password)
 
             Login(user)
         }
