@@ -13,7 +13,7 @@ object RetrofitBuilder {
 
     init {
         var retrofit = Retrofit.Builder()
-            .baseUrl("http://192.168.1.73:8080/connection/")
+            .baseUrl("http://192.168.1.57:8080/connection/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
         api = retrofit.create(API ::class.java)

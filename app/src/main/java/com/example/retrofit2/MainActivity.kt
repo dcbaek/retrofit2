@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun Login(user: User){
-        val call = RetrofitBuilder.api.getLoginResponse(user)
+        val call = RetrofitBuilder.api.getJoinResponse(user)
         call.enqueue(object : Callback<String> {
             // 통신에 성곻
             override fun onResponse(call: Call<String>, response: Response<String>) {

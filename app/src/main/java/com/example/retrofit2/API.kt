@@ -10,8 +10,13 @@ import retrofit2.http.*
 
 public interface API {
     //login
-    @POST("/android")
-    fun getLoginResponse(@Body user: User) : Call<String>
+    @POST("/api/v1/join")
+    fun getJoinResponse(
+        @Body user: User
+    ) : Call<String>
+
+    @POST("/login")
+    fun getLoginResponse()
 
     //Body_data
     @POST("/pulse-data")
